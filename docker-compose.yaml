@@ -14,8 +14,13 @@
 #    limitations under the License.
 #
 
-FROM openjdk:17.0.2
-COPY . /usr/src/myapp
-WORKDIR /usr/src/myapp
-RUN ./mvnw clean package
-CMD ./mvnw cargo:run -P tomcat90
+version: "3.9"
+
+services:
+  jpetstore:
+    container_name: jpetstore
+    build:
+      context: .
+    ports:
+      - 8080:8080
+    restart: always
